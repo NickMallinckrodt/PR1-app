@@ -1,0 +1,95 @@
+package com.example.mysnitch;
+
+import android.location.Location;
+
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import java.util.ArrayList;
+
+@Entity
+public class User {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+    private String username;
+    private String password;
+    private String mailAddress;
+    private int snitchScore;
+    private int leaderboardPosition;
+
+    @Ignore
+    private static User loggedInUser;
+
+    public User(String username, String password, String mailAddress)
+    {
+        this.setUsername(username);
+        this.setPassword(password);
+
+        if( mailAddress == null )
+            mailAddress = "";
+        this.setMailAddress(mailAddress);
+
+        this.snitchScore = 0;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getMailAddress() {
+        return mailAddress;
+    }
+
+    public void setMailAddress(String mailAddress) {
+        this.mailAddress = mailAddress;
+    }
+
+    public int getSnitchScore() {
+        return snitchScore;
+    }
+
+    public void setSnitchScore(int snitchScore) {
+        this.snitchScore = snitchScore;
+    }
+
+    public int getLeaderboardPosition() {
+        return leaderboardPosition;
+    }
+
+    public void setLeaderboardPosition(int leaderboardPosition) {
+        this.leaderboardPosition = leaderboardPosition;
+    }
+
+    public static User getLoggedInUser() {
+        return loggedInUser;
+    }
+
+    public static void setLoggedInUser(User loggedInUser) {
+        User.loggedInUser = loggedInUser;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void incrementSnitchScore(){
+        this.snitchScore++;
+    }
+}
